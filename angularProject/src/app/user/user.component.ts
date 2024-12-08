@@ -11,11 +11,12 @@ import { User } from './user.model';
 })
 export class UserComponent { 
   @Input({required:true}) user!:User
+  @Input({required:true}) selected!:boolean
   //Input decorator.
 //   @Input({required:true}) id!:string
 // @Input({required:true}) avatar!:string
 // @Input({required:true}) name!:string
-@Output() select = new EventEmitter()
+@Output() select = new EventEmitter<string>()
 //inputs with signals
 //input & output are special function
 // avatar = input.required<string>()
