@@ -3,6 +3,7 @@ import { TaskComponent } from "./task/task.component";
 import {dummyTasks} from "../dummy-tasks"
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { type newTaskData } from "./task/task.model";
+import { TaskService } from "./tasks.service";
 @Component({
     selector:"app-tasks",
     standalone:true,
@@ -17,19 +18,19 @@ export class TasksComponent{
 isAddingTask = false
 tasks = dummyTasks
 
+constructor (private taskService : TaskService){
 
-get selectedUserTasks(){
-return this.tasks.filter((task) => task.userId === this.userId)
 }
-onCompleteTask(id:string){
-    this.tasks = this.tasks.filter((task) => task.id !== id)
-  }
+get selectedUserTasks(){
+return this.taskService.getAllUserTasks(this.userId)
+}
+
   onStartAddTask(){
     this.isAddingTask = true
 
 
   }
-  onCancelAddTask(){
+  onCloseAddTask(){
     this.isAddingTask = false
   }
   onAddTask(taskData:newTaskData){
